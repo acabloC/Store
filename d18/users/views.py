@@ -3,7 +3,7 @@ from .forms import UserLoginForm,UserRegistrationForm,UserProfileForm
 from django.contrib import messages
 from .models import User
 from django.urls import reverse
-
+from products.models import Basket
 
 from django.contrib import auth
 
@@ -48,7 +48,7 @@ def profile(request):
   else:
 
      form = UserProfileForm(instance=request.user)
-  context = {'Title': 'Профиль', 'form': form, }
+  context = {'Title': 'Профиль', 'form': form, 'baskets': Basket.objects.all()}
   return render(request, 'profile.html', context = context)
 
 

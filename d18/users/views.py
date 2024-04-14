@@ -37,6 +37,7 @@ def register(request):
     context = {'form': form, }
 
     return render(request, 'register.html', context=context)
+
 def profile(request):
   if request.method == "POST":
     form = UserProfileForm(instance=request.user, data = request.POST, files=request.FILES)

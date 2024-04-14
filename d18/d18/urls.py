@@ -22,9 +22,10 @@ from django.conf import settings
 from django.conf.urls import include
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index,name="index"),
+    path('',index,name="index"),
     path("products/",include("product.urls", namespace="products")),
-    path("users/",include("users.urls",namespace="users"))
+    path("users/",include("users.urls",namespace="users")),
+    path('category/<int:category_id>/',products, name = 'category')
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

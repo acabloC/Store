@@ -57,7 +57,12 @@ def profile(request):
 
 
 
-  context = {'Title': 'Профиль', 'form': form, 'baskets': Basket.objects.all()}
+  context = {'Title': 'Профиль',
+             'form': form,
+             'baskets': Basket.objects.all(),
+             "total_sum":total_sum,
+             "total_quantity":total_quantity
+             }
   return render(request, 'profile.html', context = context)
 
 

@@ -88,38 +88,41 @@
                 </div>
                 {% endfor %}
 
+                   <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+
+        <li class="page-item {% if not products.has_previous %} disabled {% endif %}">
+            <a class="page-link"
+               href="{% if products.has_previous %} {% url 'products:paginator' products.previous_page_number %} {% else %} # {% endif %}"
+               tabindex="-1" aria-disabled="true">
+                Предыдущая</a>
+        </li>
+
+        {% for page_item in products.paginator.page_range %}
+        {% if products.number == page_item %}
+
+        <li class="page-item disabled"><a class="page-link"
+               href="#">
+            {{ page_item }}
+         </a></li>
+
+        {% elif page_item >= products.number|add:-2 and page_item <= products.number|add:2 %}
+        <li class="page-item"><a class="page-link" href="{% url 'products:paginator' page_item %}">
+            {{ page_item }}
+        </a></li>
+
+        {% endif %}
+        {% endfor %}
+
+        <li class="page-item {% if not products.has_next %} disabled {% endif %}">
+            <a class="page-link"
+               href="{% if products.has_next %} {% url 'products:paginator' products.next_page_number %} {% else %} # {% endif %}">
+                Следующая</a>
+        </li>
+    </ul>
+</nav>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-
-        </div>
 
     </div>
 
@@ -129,13 +132,5 @@
 
 
 
-    {%block footer%}
-<!-- Footer -->
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Store 2022</p>
-    </div>
-    <!-- /.container -->
-</footer>
-    {%endblock%}
+
 
